@@ -23,7 +23,6 @@ jobs:
       - run: Echo Just a DUmmy job
 
   PROD:
-    DEV:
       runs-on: self-hosted
       needs: UAT
       steps:
