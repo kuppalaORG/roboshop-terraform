@@ -7,6 +7,17 @@ resource "aws_vpc" "main" {
   }
 }
 
+#route tables
+resource "aws_route_table" "public" {
+  count =  length(var.public_subnets)
+  vpc_id = aws_vpc.main.id
+
+  tags = {
+    Name = "public-rt-${split("-", var.availability_zones[count.index])[2]}"
+  }
+}
+
+
 #subnets
 resource "aws_subnet" "public"{
   count      = length(var.public_subnets)
