@@ -112,3 +112,27 @@ resource "aws_route_table_association" "db" {
   route_table_id = aws_route_table.db.*.id[count.index]
 }
 
+## Internet gateway
+resource "aws_internet_gateway" "main" {
+  vpc_id = aws_vpc.main.id
+
+  tags = {
+    Name = "${var.env}-igw"
+  }
+}
+
+## NAT Gateway
+resource "aws_eip" "ngw-ip" {
+  count  = length(var.availability_zones)
+  domain = "vpc"
+}
+
+resource "aws_nat_gateway" "main" {
+  count         = length(var.availability_zones)
+  allocation_id = aws_eip.ngw-ip.*.id[count.index]
+  subnet_id     = aws_subnet.public.*.id[count.index]
+
+  tags = {
+    Name = "nat-gw-${split("-", var.availability_zones[count.index])[2]}"
+  }
+}
