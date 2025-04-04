@@ -17,7 +17,12 @@ ec2 = {
     frontend = {
       subnet_reference      = "web"
       instance_type         = "t2.micro"
-      allow_port      = 80
-      allow_sg_cidr = ["10.0.1.0/24", "10.0.2.0/24"] # IP ranges allowed in SG
+      allow_port            = 80
+      allow_sg_cidr         = ["10.0.1.0/24", "10.0.2.0/24"] # IP ranges allowed in SG
+      capacity              = {
+        min = 1
+        max = 1
+        desired = 1
+      }
     }
   }

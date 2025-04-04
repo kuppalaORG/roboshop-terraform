@@ -43,3 +43,22 @@ resource "aws_launch_template" "main" {
     Name = "${var.name}-${var.env}-launch-template"
   }
 }
+
+resource "aws_autoscaling_group" "main" {
+  name                = "${var.name}-${var.env}-auto-scaling-group"
+  desired_capacity    = var.capacity["desired"]
+  max_size            = var.capacity["max"]
+  min_size            = var.capacity["min"]
+  vpc_zone_identifier = var.subnet_ids
+
+  launch_template {
+    id      = aws_launch_template.main.id
+    version = "$Latest"
+  }
+
+  tag {
+    key                 = "Name"
+    propagate_at_launch = true
+    value               = "${var.name}-${var.env}"
+  }
+}
