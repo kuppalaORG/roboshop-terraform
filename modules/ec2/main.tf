@@ -1,4 +1,4 @@
-resource "aws_security_group" "main" {
+resource "aws_security_group" "allow_tls" {
   name        = "${var.name}-${var.env}-sg"
   description = "${var.name}-${var.env}-sg"
   vpc_id      = var.vpc_id
@@ -27,5 +27,19 @@ resource "aws_security_group" "main" {
 
   tags = {
     Name = "${var.name}-${var.env}-sg"
+  }
+}
+
+resource "aws_launch_template" "main" {
+  name = "${var.name}-${var.env}-lt"
+  image_id = data.aws_ami.rhel9.image_id
+  instance_type = var.instance_type
+  vpc_security_group_ids = [aws_security_group.allow_tls.id]
+
+  instance_market_options {
+    market_type = "spot"
+  }
+  tags = {
+    Name = "${var.name}-${var.env}-launch-template"
   }
 }
