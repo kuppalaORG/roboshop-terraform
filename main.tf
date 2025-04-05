@@ -25,6 +25,7 @@ module "apps" {
   env            = var.env
   bastion_nodes  = var.bastion_nodes
   asg            = true
+  vault_token    = var.vault_token
 }
 
 # module "db" {
@@ -41,4 +42,5 @@ module "apps" {
 #   env            = var.env
 #   bastion_nodes  = var.bastion_nodes
 #   asg            = false
+#   vault_token    = var.vault_token
 # }
