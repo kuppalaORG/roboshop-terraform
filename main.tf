@@ -27,6 +27,8 @@ module "apps" {
   bastion_nodes  = var.bastion_nodes
   asg            = true
   vault_token    = var.vault_token
+  zone_id        = var.zone_id
+
 }
 
 module "db" {

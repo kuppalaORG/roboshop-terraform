@@ -1,3 +1,11 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "5.81.0"
+    }
+  }
+}
 resource "aws_security_group" "main" {
   name        = "${var.name}-${var.env}-sg"
   description = "${var.name}-${var.env}-sg"
@@ -97,4 +105,12 @@ resource "aws_instance" "main" {
     ]
   }
 
+}
+
+resource "aws_route53_record" "instance" {
+  zone_id = var.zone_id
+  name    = "${var.name}.${var.env}"
+  type    = "A"
+  ttl     = 10
+  records = [aws_instance.main.private_ip]
 }
