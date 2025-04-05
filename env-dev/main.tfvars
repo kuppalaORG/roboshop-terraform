@@ -26,6 +26,7 @@ apps = {
         desired = 1
       }
       lb_internal           = false
+      lb_subnet_ref         = "public"
     }
 
     catalogue = {
@@ -34,6 +35,7 @@ apps = {
     allow_port            = 8080
     allow_sg_cidr         = ["10.0.3.0/24", "10.0.4.0/24"]
     lb_internal           = true
+    lb_subnet_ref         = "app"
     capacity              = {
       min = 1
       max = 1

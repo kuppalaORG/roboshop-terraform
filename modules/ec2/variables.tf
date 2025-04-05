@@ -16,3 +16,6 @@ variable "zone_id" {}
 variable "internal" {
   default = null
 }
+variable "lb_subnet_ids" {
+  default = []
+}
