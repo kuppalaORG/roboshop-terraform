@@ -110,7 +110,7 @@ resource "aws_instance" "main" {
 resource "aws_route53_record" "instance" {
   count   = var.asg ? 0 : 1
   zone_id = var.zone_id
-  name    = "${var.name}.${var.env}"
+  name    = "${var.name}"
   type    = "A"
   ttl     = 10
   records = [aws_instance.main.*.private_ip[count.index]]

@@ -41,7 +41,7 @@ apps = {
   }
 
 db = {
-  mongo = {
+  mongod = {
     subnet_reference    = "db"
     instance_type = "t2.micro"
     allow_port    = 27017
