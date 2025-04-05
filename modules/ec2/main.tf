@@ -6,6 +6,7 @@ terraform {
     }
   }
 }
+
 resource "aws_security_group" "main" {
   name        = "${var.name}-${var.env}-sg"
   description = "${var.name}-${var.env}-sg"
@@ -146,7 +147,7 @@ resource "aws_security_group" "load-balancer-sg" {
 resource "aws_lb" "main" {
   count              = var.asg ? 1 : 0
   name               = "${var.name}"
-  internal           = true
+  internal           = var.internal
   load_balancer_type = "application"
   security_groups    = [aws_security_group.load-balancer-sg.*.id[count.index]]
   subnets            = var.subnet_ids

@@ -13,3 +13,6 @@ variable "capacity" {
 variable "asg" {}
 variable "vault_token" {}
 variable "zone_id" {}
+variable "internal" {
+  default = null
+}
