@@ -25,6 +25,18 @@ apps = {
         desired = 1
       }
     }
+
+    catalogue = {
+    subnet_reference      = "app"
+    instance_type         = "t2.micro"
+    allow_port            = 8080
+    allow_sg_cidr         = ["10.0.3.0/24", "10.0.4.0/24"]
+    capacity              = {
+      min = 1
+      max = 1
+      desired = 1
+    }
+  }
   }
 
 db = {
