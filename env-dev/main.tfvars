@@ -31,18 +31,88 @@ apps = {
     }
 
     catalogue = {
-    subnet_reference      = "app"
-    instance_type         = "t2.micro"
-    allow_port            = 8080
-    allow_sg_cidr         = ["10.0.5.0/24", "10.0.6.0/24"]
-    allow_lb_sg_cidr    =  ["10.0.3.0/24", "10.0.4.0/24"]
-    lb_internal           = true
-    lb_subnet_ref         = "app"
-    capacity              = {
-      min = 1
-      max = 1
-      desired = 1
-    }
+      subnet_reference      = "app"
+      instance_type         = "t2.micro"
+      allow_port            = 8080
+      allow_sg_cidr         = ["10.0.5.0/24", "10.0.6.0/24"]
+      allow_lb_sg_cidr    =  ["10.0.3.0/24", "10.0.4.0/24"]
+      lb_internal           = true
+      lb_subnet_ref         = "app"
+      capacity              = {
+        min = 1
+        max = 1
+        desired = 1
+      }
+  }
+    cart = {
+      subnet_reference      = "app"
+      instance_type         = "t2.micro"
+      allow_port            = 8080
+      allow_sg_cidr         = ["10.0.5.0/24", "10.0.6.0/24"]
+      allow_lb_sg_cidr    =  ["10.0.3.0/24", "10.0.4.0/24"]
+      lb_internal           = true
+      lb_subnet_ref         = "app"
+      capacity              = {
+        min = 1
+        max = 1
+        desired = 1
+      }
+  }
+    user = {
+      subnet_reference      = "app"
+      instance_type         = "t2.micro"
+      allow_port            = 8080
+      allow_sg_cidr         = ["10.0.5.0/24", "10.0.6.0/24"]
+      allow_lb_sg_cidr    =  ["10.0.3.0/24", "10.0.4.0/24"]
+      lb_internal           = true
+      lb_subnet_ref         = "app"
+      capacity              = {
+        min = 1
+        max = 1
+        desired = 1
+      }
+  }
+    shipping = {
+      subnet_reference      = "app"
+      instance_type         = "t2.micro"
+      allow_port            = 8080
+      allow_sg_cidr         = ["10.0.5.0/24", "10.0.6.0/24"]
+      allow_lb_sg_cidr    =  ["10.0.3.0/24", "10.0.4.0/24"]
+      lb_internal           = true
+      lb_subnet_ref         = "app"
+      capacity              = {
+        min = 1
+        max = 1
+        desired = 1
+      }
+  }
+    payment = {
+      subnet_reference      = "app"
+      instance_type         = "t2.micro"
+      allow_port            = 8080
+      allow_sg_cidr         = ["10.0.5.0/24", "10.0.6.0/24"]
+      allow_lb_sg_cidr    =  ["10.0.3.0/24", "10.0.4.0/24"]
+      lb_internal           = true
+      lb_subnet_ref         = "app"
+      capacity              = {
+        min = 1
+        max = 1
+        desired = 1
+      }
+  }
+    dispatch = {
+      subnet_reference      = "app"
+      instance_type         = "t2.micro"
+      allow_port            = 8080
+      allow_sg_cidr         = ["10.0.5.0/24", "10.0.6.0/24"]
+      allow_lb_sg_cidr    =  ["10.0.3.0/24", "10.0.4.0/24"]
+      lb_internal           = true
+      lb_subnet_ref         = "app"
+      capacity              = {
+        min = 1
+        max = 1
+        desired = 1
+      }
   }
   }
 
