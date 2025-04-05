@@ -13,7 +13,7 @@ vpc = {
   default_vpc_cidr   = "172.31.0.0/16"
 }
 
-ec2 = {
+apps = {
     frontend = {
       subnet_reference      = "web"
       instance_type         = "t2.micro"
@@ -26,3 +26,30 @@ ec2 = {
       }
     }
   }
+
+db = {
+  mongo = {
+    subnet_ref    = "db"
+    instance_type = "t2.micro"
+    allow_port    = 27017
+    allow_sg_cidr = ["10.0.5.0/24", "10.0.6.0/24"]
+  }
+  mysql = {
+    subnet_reference    = "db"
+    instance_type = "t2.micro"
+    allow_port    = 3306
+    allow_sg_cidr = ["10.0.5.0/24", "10.0.6.0/24"]
+  }
+  rabbitmq = {
+    subnet_ref    = "db"
+    instance_type = "t2.micro"
+    allow_port    = 5672
+    allow_sg_cidr = ["10.0.5.0/24", "10.0.6.0/24"]
+  }
+  redis = {
+    subnet_ref    = "db"
+    instance_type = "t2.micro"
+    allow_port    = 6379
+    allow_sg_cidr = ["10.0.5.0/24", "10.0.6.0/24"]
+  }
+}

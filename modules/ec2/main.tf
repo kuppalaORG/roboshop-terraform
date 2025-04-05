@@ -31,10 +31,11 @@ resource "aws_security_group" "main" {
 }
 
 resource "aws_launch_template" "main" {
-  name = "${var.name}-${var.env}-lt"
-  image_id = data.aws_ami.rhel9.image_id
-  instance_type = var.instance_type
-  vpc_security_group_ids = [aws_security_group.main.id]
+  count                   = var.asg ? 1 : 0
+  name                    = "${var.name}-${var.env}-lt"
+  image_id                = data.aws_ami.rhel9.image_id
+  instance_type           = var.instance_type
+  vpc_security_group_ids  = [aws_security_group.main.id]
 
   instance_market_options {
     market_type = "spot"
@@ -45,6 +46,7 @@ resource "aws_launch_template" "main" {
 }
 
 resource "aws_autoscaling_group" "main" {
+  count               =  var.asg ? 1 : 0
   name                = "${var.name}-${var.env}-auto-scaling-group"
   desired_capacity    = var.capacity["desired"]
   max_size            = var.capacity["max"]
