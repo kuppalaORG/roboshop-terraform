@@ -117,6 +117,7 @@ resource "aws_route53_record" "instance" {
   ttl     = 10
   records = [aws_instance.main.*.private_ip[count.index]]
 }
+
 resource "aws_security_group" "load-balancer-sg" {
   count              = var.asg ? 1 : 0
   name        = "${var.name}-${var.env}-alb-sg"
@@ -156,14 +157,14 @@ resource "aws_lb" "main" {
   }
 }
 
-# resource "aws_lb_target_group" "main" {
-#   count              = var.asg ? 1 : 0
-#   name               = "${var.name}"
-#   port               = var.allow_port
-#   protocol           = "HTTP"
-#   vpc_id             = var.vpc_id
-# }
-#
+resource "aws_lb_target_group" "main" {
+  count              = var.asg ? 1 : 0
+  name               = "${var.name}"
+  port               = var.allow_port
+  protocol           = "HTTP"
+  vpc_id             = var.vpc_id
+}
+
 #
 # resource "aws_lb_listener" "front_end" {
 #   count              = var.asg ? 1 : 0
