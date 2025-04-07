@@ -9,4 +9,3 @@ variable "acm_https_arn" {}
 variable "listener_port" {}
 variable "listener_protocol" {}
 variable "ssl_policy" {}
-variable "lb_rule_priority" {}
