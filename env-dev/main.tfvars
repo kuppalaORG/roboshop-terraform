@@ -29,7 +29,7 @@ apps = {
       }
       lb_internal           = false
       lb_subnet_ref         = "public"
-       acm_https_arn        = "arn:aws:acm:us-east-1:932966355658:certificate/879c726b-aaf3-4b25-abc6-60596d4ae20b"
+      acm_https_arn        = "arn:aws:acm:us-east-1:932966355658:certificate/879c726b-aaf3-4b25-abc6-60596d4ae20b"
     }
 
     catalogue = {
