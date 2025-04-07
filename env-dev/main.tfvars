@@ -27,9 +27,8 @@ apps = {
         max = 1
         desired = 1
       }
-      lb_internal           = false
-      lb_subnet_ref         = "public"
-      acm_https_arn        = "arn:aws:acm:us-east-1:932966355658:certificate/879c726b-aaf3-4b25-abc6-60596d4ae20b"
+      lb_rule_priority = 1
+      lb_ref           = "public"
     }
 
     catalogue = {
@@ -38,14 +37,14 @@ apps = {
       allow_port            = 8080
       allow_sg_cidr         = ["10.0.5.0/24", "10.0.6.0/24"]
       allow_lb_sg_cidr    =  ["10.0.3.0/24", "10.0.4.0/24","10.0.5.0/24", "10.0.6.0/24"]
-      lb_internal           = true
-      lb_subnet_ref         = "app"
+
       capacity              = {
         min = 1
         max = 1
         desired = 1
       }
-      acm_https_arn         = null
+      lb_ref           = "private"
+      lb_rule_priority = 1
   }
     cart = {
       subnet_reference      = "app"
@@ -53,14 +52,15 @@ apps = {
       allow_port            = 8080
       allow_sg_cidr         = ["10.0.5.0/24", "10.0.6.0/24"]
       allow_lb_sg_cidr    =  ["10.0.3.0/24", "10.0.4.0/24","10.0.5.0/24", "10.0.6.0/24"]
-      lb_internal           = true
-      lb_subnet_ref         = "app"
+
       capacity              = {
         min = 1
         max = 1
         desired = 1
       }
-      acm_https_arn         = null
+
+      lb_rule_priority = 2
+      lb_ref           = "private"
   }
     user = {
       subnet_reference      = "app"
@@ -68,14 +68,15 @@ apps = {
       allow_port            = 8080
       allow_sg_cidr         = ["10.0.5.0/24", "10.0.6.0/24"]
       allow_lb_sg_cidr    =  ["10.0.3.0/24", "10.0.4.0/24","10.0.5.0/24", "10.0.6.0/24"]
-      lb_internal           = true
-      lb_subnet_ref         = "app"
+
       capacity              = {
         min = 1
         max = 1
         desired = 1
       }
-      acm_https_arn         = null
+
+      lb_rule_priority = 3
+      lb_ref           = "private"
   }
     shipping = {
       subnet_reference      = "app"
@@ -83,14 +84,13 @@ apps = {
       allow_port            = 8080
       allow_sg_cidr         = ["10.0.5.0/24", "10.0.6.0/24"]
       allow_lb_sg_cidr    =  ["10.0.3.0/24", "10.0.4.0/24","10.0.5.0/24", "10.0.6.0/24"]
-      lb_internal           = true
-      lb_subnet_ref         = "app"
       capacity              = {
         min = 1
         max = 1
         desired = 1
       }
-      acm_https_arn         = null
+      lb_rule_priority = 4
+      lb_ref           = "private"
   }
     payment = {
       subnet_reference      = "app"
@@ -98,14 +98,13 @@ apps = {
       allow_port            = 8080
       allow_sg_cidr         = ["10.0.5.0/24", "10.0.6.0/24"]
       allow_lb_sg_cidr    =  ["10.0.3.0/24", "10.0.4.0/24","10.0.5.0/24", "10.0.6.0/24"]
-      lb_internal           = true
-      lb_subnet_ref         = "app"
       capacity              = {
         min = 1
         max = 1
         desired = 1
       }
-      acm_https_arn         = null
+      lb_rule_priority = 5
+      lb_ref           = "private"
   }
     dispatch = {
       subnet_reference      = "app"
@@ -113,14 +112,13 @@ apps = {
       allow_port            = 8080
       allow_sg_cidr         = ["10.0.5.0/24", "10.0.6.0/24"]
       allow_lb_sg_cidr    =  ["10.0.3.0/24", "10.0.4.0/24","10.0.5.0/24", "10.0.6.0/24"]
-      lb_internal           = true
-      lb_subnet_ref         = "app"
       capacity              = {
         min = 1
         max = 1
         desired = 1
       }
-      acm_https_arn         = null
+      lb_rule_priority = 6
+      lb_ref           = "private"
   }
   }
 
@@ -148,5 +146,29 @@ db = {
     instance_type = "t2.micro"
     allow_port    = 6379
     allow_sg_cidr = ["10.0.5.0/24", "10.0.6.0/24"]
+  }
+}
+
+load_balancers = {
+  private = {
+    internal           = true
+    load_balancer_type = "application"
+    allow_lb_sg_cidr   = ["10.0.3.0/24", "10.0.4.0/24","10.0.5.0/24", "10.0.6.0/24"]
+    subnet_ref         = "app"
+    acm_https_arn      = null
+    listener_port      = "80"
+    listener_protocol  = "HTTP"
+    ssl_policy         = null
+  }
+
+  public = {
+    internal           = false
+    load_balancer_type = "application"
+    allow_lb_sg_cidr   = ["0.0.0.0/0"]
+    subnet_ref         = "public"
+    acm_https_arn      = "arn:aws:acm:us-east-1:932966355658:certificate/879c726b-aaf3-4b25-abc6-60596d4ae20b"
+    listener_port      = "443"
+    listener_protocol  = "HTTPS"
+    ssl_policy         = "ELBSecurityPolicy-2016-08"
   }
 }
