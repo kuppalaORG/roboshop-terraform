@@ -5,4 +5,3 @@ variable bastion_nodes {}
 variable "db" {}
 variable "vault_token" {}
 variable "zone_id" {}
-variable "acm_https_arn" {}
