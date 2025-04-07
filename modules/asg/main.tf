@@ -128,26 +128,25 @@ resource "aws_lb_target_group" "main" {
 
 resource "aws_lb_listener" "internal-http" {
   count             = var.internal ? 1 :0
-  load_balancer_arn = aws_lb.main.*.arn[count.index]
+  load_balancer_arn = aws_lb.main.arn
   port              = "80"
   protocol          = "HTTP"
 
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.main.*.arn[count.index]
+    target_group_arn = aws_lb_target_group.main.arn
   }
 }
 resource "aws_lb_listener" "public-https" {
   count             = var.internal ? 0 :1
-  load_balancer_arn = aws_lb.main.*.arn[count.index]
+  load_balancer_arn = aws_lb.main.arn
   port              = "443"
   protocol          = "HTTP"
   ssl_policy        = "ELBSecurityPolicy-2016-08"
-  certificate_arn   = "arn:aws:iam::187416307283:server-certificate/test_cert_rab3wuqwgja25ct3n4jdj2tzu4"
-
+  certificate_arn   = var.acm_https_arn
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.main.*.arn[count.index]
+    target_group_arn = aws_lb_target_group.main.arn
   }
 }
 

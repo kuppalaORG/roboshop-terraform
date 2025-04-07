@@ -22,3 +22,4 @@ variable "lb_subnet_ids" {
 variable "allow_lb_sg_cidr" {
   default = []
 }
+variable "acm_https_arn" {}

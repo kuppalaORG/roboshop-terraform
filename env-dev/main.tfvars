@@ -2,6 +2,7 @@ env = "dev"
 bastion_nodes = ["172.31.85.32/32"]
 zone_id = "Z0217682200043ETYLGYJ"
 
+
 vpc = {
   cidr              = "10.0.0.0/16"
   public_subnets    = ["10.0.1.0/24", "10.0.2.0/24"]
@@ -28,6 +29,7 @@ apps = {
       }
       lb_internal           = false
       lb_subnet_ref         = "public"
+       acm_https_arn        = "arn:aws:acm:us-east-1:932966355658:certificate/879c726b-aaf3-4b25-abc6-60596d4ae20b"
     }
 
     catalogue = {
@@ -43,6 +45,7 @@ apps = {
         max = 1
         desired = 1
       }
+      acm_https_arn         = null
   }
     cart = {
       subnet_reference      = "app"
@@ -57,6 +60,7 @@ apps = {
         max = 1
         desired = 1
       }
+      acm_https_arn         = null
   }
     user = {
       subnet_reference      = "app"
@@ -71,6 +75,7 @@ apps = {
         max = 1
         desired = 1
       }
+      acm_https_arn         = null
   }
     shipping = {
       subnet_reference      = "app"
@@ -85,6 +90,7 @@ apps = {
         max = 1
         desired = 1
       }
+      acm_https_arn         = null
   }
     payment = {
       subnet_reference      = "app"
@@ -99,6 +105,7 @@ apps = {
         max = 1
         desired = 1
       }
+      acm_https_arn         = null
   }
     dispatch = {
       subnet_reference      = "app"
@@ -113,6 +120,7 @@ apps = {
         max = 1
         desired = 1
       }
+      acm_https_arn         = null
   }
   }
 
